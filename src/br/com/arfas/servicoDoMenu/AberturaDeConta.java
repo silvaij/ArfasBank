@@ -1,11 +1,10 @@
 package br.com.arfas.servicoDoMenu;
 
 import br.com.arfas.menu.MenuBanco;
-
+import br.com.arfas.tipoDeContas.Conta;
 import br.com.arfas.tipoDeContas.ContaCorrente;
 import br.com.arfas.tipoDeContas.ContaPoupanca;
 import br.com.arfas.tipoDeContas.ContaSalario;
-import br.com.arfas.utils.Gerenciador;
 import br.com.arfas.utils.StringUtils;
 
 import java.io.BufferedReader;
@@ -16,15 +15,12 @@ import java.io.InputStreamReader;
 
 import static br.com.arfas.menu.MenuBanco.validaAgencia;
 
-
 public class AberturaDeConta {
 
 	BufferedReader dadosDaConta = new BufferedReader(new InputStreamReader(System.in));
-    ContaCorrente contaCorrente;
-    ContaPoupanca contaPoupanca;
-    ContaSalario contaSalario;
+    
 
-	public void abrirConta() throws IOException {
+	public Conta abrirConta(Conta conta) throws IOException, InterruptedException {
 		MenuBanco menuBanco = new MenuBanco();
 		String bancoEscolhido = menuBanco.selecionarNomeDoBanco();
 		String numeroAgencia;
@@ -66,30 +62,28 @@ public class AberturaDeConta {
 			}else{
 				int validador = Integer.parseInt(tipoDeConta);
 				if(validador == 1){
-					contaCorrente = new ContaCorrente(bancoEscolhido,numeroAgencia,numeroConta,0.0,1000.00);
+					conta = new ContaCorrente(bancoEscolhido,numeroAgencia,numeroConta,0.0,1000.00);
 					System.out.println("DADOS DA CONTA ABERTA:");
-					System.out.println(contaCorrente.toString());
-					Gerenciador armazem = new Gerenciador();
-					armazem.adicionaConta(contaCorrente);
+					System.out.println(conta.toString());
+					
 					break;
 				}
 				if(validador == 2){
-					contaPoupanca = new ContaPoupanca(bancoEscolhido,numeroAgencia,numeroConta,0.0,10L);
+					conta = new ContaPoupanca(bancoEscolhido,numeroAgencia,numeroConta,0.0,10L);
 					System.out.println("DADOS DA CONTA ABERTA:");
-					System.out.println(contaPoupanca.toString());
-					Gerenciador armazem = new Gerenciador();
-					armazem.adicionaConta(contaPoupanca);
+					System.out.println(conta.toString());
+					
 					break;
 				}else{
-					contaSalario = new ContaSalario(bancoEscolhido,numeroAgencia,numeroConta,0.0,3);
+					conta = new ContaSalario(bancoEscolhido,numeroAgencia,numeroConta,0.0,3);
 					System.out.println("DADOS DA CONTA ABERTA:");
-					System.out.println(contaSalario.toString());
-					Gerenciador armazem = new Gerenciador();
-					armazem.adicionaConta(contaSalario);
+					System.out.println(conta.toString());
+					
 					break;
 				}
 			}
 		}
+		return conta;
 	}
 
 

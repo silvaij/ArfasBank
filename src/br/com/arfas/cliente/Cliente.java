@@ -1,6 +1,6 @@
 package br.com.arfas.cliente;
 
-import br.com.arfas.utils.Gerenciador;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,19 +12,16 @@ import java.util.regex.Pattern;
 
 public class Cliente {
      private String nomeCompleto;
-     private String cpf;
-     private String cnpj;
+     private String doc;
      private String senha ;
      private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	 public static List<Cliente> listaDeCliente = new ArrayList<>();
-
 
     public  Cliente(){};
 
     public Cliente (String nomeCompleto,String doc,String senha) {
     	 this.nomeCompleto = nomeCompleto;
-    	 this.cpf = doc;
-    	 this.cnpj= doc;
+    	 this.doc = doc;  	 
     	 this.senha=senha;
      }
 
@@ -36,20 +33,12 @@ public class Cliente {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getDoc() {
+		return doc;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setDoc(String doc) {
+		this.doc = doc;
 	}
 
 	public String getSenha() {
@@ -64,15 +53,14 @@ public class Cliente {
 	public String toString() {
 		return "Cliente{" +
 				"nomeCompleto='" + nomeCompleto + '\'' +
-				", cpf='" + cpf + '\'' +
-				", cnpj=" + cnpj +
+				", doc='" + doc + '\'' +				
 				", senha='" + senha + '\'' +
 				'}';
 	}
 
-	public Cliente criaClientecpf() throws IOException {
+	public Cliente criaClientecpf(Cliente cliente) throws IOException {
 		while (true){
-			System.out.println(" Digite o nome completo exemplo -> : 'João Francisco da Silva' ");
+			System.out.println(" Digite o nome completo exemplo -> : 'Joao Francisco da Silva' ");
 			nomeCompleto = input.readLine();
 			boolean verificaNome = validaNomeCompleto(nomeCompleto);
 			if ((nomeCompleto.isEmpty()) || (!verificaNome)) {
@@ -80,9 +68,9 @@ public class Cliente {
 			}else{
 				while(true) {
 					System.out.println(" Digite o cpf no formato : XXX.XXX.XXX-XX  use o (' - ') no final");
-					cpf = input.readLine();
-					boolean verificaCpf = validaCpf(cpf);
-					if (cpf.isEmpty() || !verificaCpf) {
+					doc = input.readLine();
+					boolean verificaCpf = validaCpf(doc);			
+					if ((doc.isEmpty()) || (!verificaCpf)) {
 						System.out.println("CPF Invalido !.Digite novamente");
 					}else{
 						while(true){
@@ -100,12 +88,14 @@ public class Cliente {
 				}
 				break;
 			}
-		}//fim do primeiro laço
-		Cliente cliente = new Cliente(nomeCompleto,cpf,senha);
+		}//fim do primeiro laco
+		cliente.setNomeCompleto(nomeCompleto);
+		cliente.setDoc(doc);
+		cliente.setSenha(senha);	
 		return cliente;
 	}
 
-	public Cliente criaClientecnpj() throws IOException {
+	public Cliente criaClientecnpj(Cliente cliente) throws IOException {
 		while (true){
 			System.out.println(" Digite o nome da empresa exemplo: 'Mutante Tecnologia ltda' ");
 			nomeCompleto = input.readLine();
@@ -115,9 +105,9 @@ public class Cliente {
 			}else{
 				while(true) {
 					System.out.println(" Digite o cnpj no *FORMATO* :' XX.XXX.XXX/0001-XX ' ");
-					cnpj = input.readLine();
-					boolean verificaCnpj = validaCnpj(cnpj);
-					if (cnpj.isEmpty() || !verificaCnpj) {
+					doc = input.readLine();
+					boolean verificaCnpj = validaCnpj(doc);
+					if (doc.isEmpty() || !verificaCnpj) {
 						System.out.println(" Cnpj Invalido !.Digite novamente");
 					}else{
 						while(true){
@@ -136,7 +126,10 @@ public class Cliente {
 				break;
 			}
 		}//fim do primeiro laço
-		Cliente cliente = new Cliente(nomeCompleto,cnpj,senha);
+		
+		cliente.setNomeCompleto(nomeCompleto);
+		cliente.setDoc(doc);
+		cliente.setSenha(senha);
 		return cliente;
 	}
 
@@ -166,23 +159,6 @@ public class Cliente {
 		Pattern padrao = Pattern.compile(regexNome);
 		Matcher combine = padrao.matcher(senha);
 		return combine.find();
-	}
-
-	public static boolean autenticaCliente(String doc,String senha){
-		int cont ;
-		for(cont = 0 ; cont<=listaDeCliente.size()-1; cont++){
-			boolean validadorDocCpf = listaDeCliente.get(cont).getCpf().equals(doc);
-			boolean validadorDocCnpj = listaDeCliente.get(cont).getCnpj().equals(doc);
-			boolean validadorPass = listaDeCliente.get(cont).getSenha().equals(senha);
-			if(((validadorDocCpf)&&(validadorPass))||((validadorDocCnpj)&&(validadorPass))){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void adicionaClienteNaLista(Cliente cliente){
-    	listaDeCliente.add(cliente);
 	}
 
 }

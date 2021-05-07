@@ -1,5 +1,6 @@
 package br.com.arfas.menu;
 
+
 import br.com.arfas.utils.StringUtils;
 
 import java.io.BufferedReader;
@@ -16,12 +17,12 @@ public class MenuBanco {
     BufferedReader opcao = new BufferedReader(new InputStreamReader(System.in));
     String opcaoUsuario=null;
 
-    public String selecionarNomeDoBanco() throws IOException {
+    public String selecionarNomeDoBanco() throws IOException{
         //Coleção de nomes de banco
         nomesDeBanco.put(1,"Banco do Brasil");
         nomesDeBanco.put(2,"Bradesco");
         nomesDeBanco.put(3,"Santander Brasil");
-        nomesDeBanco.put(4,"Caixa Econômica Federal");
+        nomesDeBanco.put(4,"Caixa Economica Federal");
         nomesDeBanco.put(5,"BTG Pactual");
         nomesDeBanco.put(6,"Safra");
         nomesDeBanco.put(7,"Sicoob");
@@ -61,6 +62,7 @@ public class MenuBanco {
                 break;
             }
         }
+        
         return opcaoUsuario;
     }
 
