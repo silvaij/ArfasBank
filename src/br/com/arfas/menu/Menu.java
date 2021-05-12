@@ -11,7 +11,7 @@ import br.com.arfas.servicoDoMenu.CadastroCliente;
 import br.com.arfas.servicoDoMenu.DepositoMenu;
 import br.com.arfas.servicoDoMenu.TransfereMenu;
 import br.com.arfas.tipoDeContas.Conta;
-import br.com.arfas.utils.Gerenciador;
+
 
 import static br.com.arfas.servicoDoMenu.SaqueMenu.efetuaSaque;
 
@@ -22,7 +22,8 @@ public class Menu {
 	static Conta conta = null;
 	static Conta contaDestino = null;
 	Double valor;
-
+	
+	
 	public static List<Cliente> getListaDeCliente() {
 		return listaDeCliente;
 	}
@@ -57,10 +58,13 @@ public class Menu {
 				System.out.println("EFETUAR SAQUE");
 				conta = efetuaSaque();
 				try {
-					if (!(conta == null)) {
+					if (!(conta.toString().equals(null))) {
 						System.out.println("INFORME VALOR DO SAQUE");
 						valor = Double.parseDouble(menu.readLine());
 						conta.sacar(valor);
+						System.out.println("SALDO ATUAL "+conta.getSaldo());
+					}else {
+						System.out.println(" Nao encontramos sua conta ");
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("Valor incorreto");
@@ -70,14 +74,17 @@ public class Menu {
 				System.out.println("EFETURAR DEPOSITO");
 				conta = DepositoMenu.efetuaDeposito();
 				try {
-					if (!(conta == null)) {
+					if (!(conta.toString().equals(null))) {
 						System.out.println("INFORME VALOR DE DEPOSITO");
 						valor = Double.parseDouble(menu.readLine());
 						conta.depositar(valor);
+						System.out.println("SALDO ATUAL "+conta.getSaldo());
+					}else {
+						System.out.println("Dados informados para o deposito estao errados");
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("Valor incorreto");
-				}
+				}		
 				break;
 			case "2":
 				System.out.println("CADASTRO CLIENTE");
@@ -90,10 +97,12 @@ public class Menu {
 				conta = TransfereMenu.retornaContaDeOrigem();
 				contaDestino = TransfereMenu.retornaContaDeDestino();
 				try {
-					if (!(conta == null)) {
+					if (!(conta.toString().equals(null))) {
 						System.out.println("INFORME VALOR DE DEPOSITO");
 						valor = Double.parseDouble(menu.readLine());
 						TransfereMenu.efetuaTransferencia(conta, contaDestino, valor);
+					}else {
+						System.out.println("Erro no processo de transferencia");
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("Valor incorreto");
@@ -101,6 +110,9 @@ public class Menu {
 				break;
 			case "6":
 				System.out.println("MOSTRAR MONTANTE DISPONIVEL NAS CONTAS");
+				System.out.println("OLA GERENTE SEGUE SALDO DOS SEUS CLIENTES");
+				Double total = totalizadorDeSaldo(listaDeConta);
+				System.out.println(total);
 			case "7":
 				System.out.println("########################");
 				System.out.println("########################");
@@ -151,6 +163,7 @@ public class Menu {
 	}
 
 	public static Conta autenticaConta(String banco, String nAgencia, String nConta) {
+
 		if (!listaDeConta.isEmpty()) {
 			int cont;
 			for (cont = 0; cont <= listaDeConta.size() - 1; cont++) {
@@ -161,6 +174,7 @@ public class Menu {
 					break;
 				} else if (cont == listaDeConta.size() - 1) {
 					System.out.println("AGENCIA E CONTA INVALIDOS TENTE NOVAMENTE");
+		            
 				}
 			}
 		} else {
@@ -168,5 +182,19 @@ public class Menu {
 		}
 		return conta;
 	}
-
+    
+	public static Double totalizadorDeSaldo(List<Conta>lista) {
+		int cont;
+		double totSaldo;
+		double totalizador = 0;
+		if(!lista.isEmpty()) {
+		for (cont = 0; cont <= lista.size() - 1; cont++) {
+			totSaldo = lista.get(cont).getSaldo();
+			totalizador+=totSaldo;
+		   }
+		}else {
+			System.out.println("Nenhuma Conta em sua Gerencia");
+		}
+		return totalizador;
+	}
 }

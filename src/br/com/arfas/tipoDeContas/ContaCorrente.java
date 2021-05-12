@@ -1,6 +1,6 @@
 package br.com.arfas.tipoDeContas;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Tributavel {
 
 	private Double limiteDeCreditoPreAprov;
 	
@@ -10,6 +10,12 @@ public class ContaCorrente extends Conta {
 		
 	}
 	
+	@Override
+	public double getImposto(double valor) {		
+		return Tributavel.super.getImposto(valor);
+	}
+	
+		
 	@Override
 	public Double getSaldo() {		
 		saldo = saldo + limiteDeCreditoPreAprov;
@@ -21,7 +27,7 @@ public class ContaCorrente extends Conta {
 		if((valor != 0.00)&&(valor > 0.00)){
 			saldo+=valor;
 		}else {
-			System.out.println("Valor inv�lido");
+			System.out.println("Valor invalido");
 		}
 		return saldo;
 	}
@@ -33,7 +39,7 @@ public class ContaCorrente extends Conta {
 			System.out.println("Transferido"+" "+valor);
 			System.out.println("Saldo Atual"+" "+saldo);
 		}else {
-			System.out.println("Valor inv�lido");
+			System.out.println("Valor invalido");
 		}
 		return saldo;
 	}

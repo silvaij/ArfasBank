@@ -25,7 +25,7 @@ public class ContaPoupanca extends Conta {
 				saldo = (saldo * taxaDeJuros) + saldo;
 			}
 		} else {
-			System.out.println("Dia inv�lido");
+			System.out.println("Dia invalido");
 		}
 
 		return saldo;

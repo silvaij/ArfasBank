@@ -53,7 +53,7 @@ public class AberturaDeConta {
 		while(true) {
 			System.out.println("-- QUAL TIPO DA CONTA ? : ");
 			System.out.println("DIGITE NUMERO -> 1 - PARA ATRIBUIR (** CONTA CORRENTE **) ");
-			System.out.println("DIGITE NUMERO -> 2 - PARA ATRIBUIR (** CONTA POUPANÇA **) ");
+			System.out.println("DIGITE NUMERO -> 2 - PARA ATRIBUIR (** CONTA POUPANCA **) ");
 			System.out.println("DIGITE NUMERO -> 3 - PARA ATRIBUIR (** CONTA SALARIO **) ");
 			tipoDeConta = dadosDaConta.readLine();
 			boolean validaTipoDeConta = MenuBanco.validaTipoDeConta(tipoDeConta);

@@ -1,6 +1,6 @@
 package br.com.arfas.tipoDeContas;
 
-public abstract class Conta {
+public abstract class Conta  {
     protected String  banco;
     protected String numeroAgencia;
     protected String numeroConta;
