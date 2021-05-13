@@ -154,6 +154,7 @@ public class Menu {
 		} else {
 			System.out.println("Nenhum cliente cadastrado");
 			autenticado = false;
+			
 		}
 		return autenticado;
 	}
@@ -162,8 +163,8 @@ public class Menu {
 		listaDeConta.add(conta);
 	}
 
-	public static Conta autenticaConta(String banco, String nAgencia, String nConta) {
-
+	public static Conta autenticaConta(String banco, String nAgencia, String nConta) throws Throwable {
+		Menu menu = new Menu();
 		if (!listaDeConta.isEmpty()) {
 			int cont;
 			for (cont = 0; cont <= listaDeConta.size() - 1; cont++) {
@@ -173,24 +174,26 @@ public class Menu {
 				if (((validadorBanco) && (validadorNAgencia)) && (validadorNConta)) {
 					break;
 				} else if (cont == listaDeConta.size() - 1) {
-					System.out.println("AGENCIA E CONTA INVALIDOS TENTE NOVAMENTE");
-		            
+					System.out.println("AGENCIA E CONTA INVALIDOS TENTE NOVAMENTE");		
+					menu.imprimeMenu();	
 				}
 			}
 		} else {
 			System.out.println("Nenhuma conta cadastrada");
+			menu.imprimeMenu();
 		}
 		return conta;
 	}
     
 	public static Double totalizadorDeSaldo(List<Conta>lista) {
 		int cont;
-		double totSaldo;
+		double totSaldo = 0 ;
 		double totalizador = 0;
 		if(!lista.isEmpty()) {
 		for (cont = 0; cont <= lista.size() - 1; cont++) {
 			totSaldo = lista.get(cont).getSaldo();
-			totalizador+=totSaldo;
+			System.out.println(totSaldo);
+			totalizador = totalizador + totSaldo ;
 		   }
 		}else {
 			System.out.println("Nenhuma Conta em sua Gerencia");

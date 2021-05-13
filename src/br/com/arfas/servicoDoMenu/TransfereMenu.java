@@ -14,7 +14,7 @@ public class TransfereMenu {
 		destino.depositar(valor);	
 	}
 		
-	public static Conta retornaContaDeOrigem() throws IOException {
+	public static Conta retornaContaDeOrigem() throws Throwable {
 		String banco;
 		String numeroAgencia = null;
 		String numeroConta;
@@ -30,7 +30,7 @@ public class TransfereMenu {
 		return Menu.autenticaConta(banco, numeroAgencia, numeroConta);
 	}
 	
-    public static Conta retornaContaDeDestino() throws IOException {
+    public static Conta retornaContaDeDestino() throws Throwable {
     	String banco;
 		String numeroAgencia = null;
 		String numeroConta;

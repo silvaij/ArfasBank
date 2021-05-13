@@ -7,7 +7,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 	public ContaCorrente(String banco, String numeroAgencia, String numeroConta, Double saldo, Double limiteDeCreditoPreAprov) {
 		super(banco, numeroAgencia, numeroConta, saldo);
 		this.limiteDeCreditoPreAprov = limiteDeCreditoPreAprov;	
-		
+		this.saldo = saldo + this.limiteDeCreditoPreAprov;		
 	}
 	
 	@Override
@@ -17,8 +17,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 	
 		
 	@Override
-	public Double getSaldo() {		
-		saldo = saldo + limiteDeCreditoPreAprov;
+	public Double getSaldo() {				
 		return saldo;
 	}
 

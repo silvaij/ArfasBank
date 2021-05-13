@@ -10,7 +10,7 @@ import br.com.arfas.menu.MenuBanco;
 import br.com.arfas.tipoDeContas.Conta;
 
 public class SaqueMenu {
-     public static Conta efetuaSaque() throws IOException {
+     public static Conta efetuaSaque() throws Throwable {
          BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
          String doc ;
          String senha;

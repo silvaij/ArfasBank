@@ -9,7 +9,7 @@ import br.com.arfas.menu.MenuBanco;
 import br.com.arfas.tipoDeContas.Conta;
 
 public class DepositoMenu {
-    public static Conta efetuaDeposito() throws IOException {
+    public static Conta efetuaDeposito() throws Throwable {
     	String banco;
         String numeroAgencia = null;
         String numeroConta;
